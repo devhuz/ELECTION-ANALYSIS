@@ -20,6 +20,8 @@ df = df.drop(columns=["Election_Type"])
 # 4. Fill blank text values
 df["Sex"] = df["Sex"].fillna("Unknown")
 df["Party"] = df["Party"].fillna("Unknown")
+# 4b. Turnout above 100% is impossible: mark as missing
+df.loc[df["Turnout_Percentage"] > 100, "Turnout_Percentage"] = None
 
 # 5. Split general elections from by-elections
 ge_years = [1962, 1967, 1971, 1977, 1980, 1984, 1989, 1991,
